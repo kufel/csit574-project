@@ -12,28 +12,22 @@ public class MainSample {
 		System.out.println("Starting program");
 		Program program = new Program();
 		
-//		int[][] test = new int[][] 
-//		{ 
-//			{40, 40, 150, 10, 150, 150, 30}, 
-//			{150, 100, 150, 150, 150, 150, 150}, 
-//			{150, 150, 150, 150, 150, 150, 150}, 
-//			{150, 150, 150, 140, 150, 150, 150}, 
-//			{150, 40, 40, 40, 150, 250, 150}, 
-//			{150, 25, 150, 150, 150, 150, 150}, 
-//			{150, 20, 150, 150, 70, 150, 150}
-//		};
+		int[][][] mask = new int[][][] { { { 255, 0, 219 }, { 30, 125, 0 }, { 74, 60, 86 }, { 8647, 169 } } };
 		
-		int[][][] test = null;
-		test = program.openFile("PPM/grid-16-16-256.dat", 16, 16);
-		program.saveFile(test, "output/grid-16-16-256.ppm", "P3", test.length, test[0].length, 256);
-//		program.saveHistogram(test, "output-0/sample.csv", 256);
-//		program.saveCompressedFile(test, "output-0/sample.rle");
-
+		int[][][] image = program.openFile("PPM/grid-16-16-256.dat", 16, 16);
+		int[][][] key = program.openFile("PPM/2x2.dat", 2, 2);
+		int[][][] encoded = program.encodeLSB(image, key);
+		program.saveFile(encoded, "output/encode.ppm", "P3", encoded.length, encoded[0].length, 256);
+		
+		//int[][][] image2 = program.openFile("PPM/grid-16-16-256.dat", 16, 16);
+		int[][][] decoded = program.decodeLSB(image, encoded, 2, 2);
+		program.saveFile(decoded, "output/decode.ppm", "P3", decoded.length, decoded[0].length, 256);
+		
 		System.out.println(" ");
-		for (int i = 0; i < test.length; i++) {
+		for (int i = 0; i < encoded.length; i++) {
 			String s = "";
-			for (int j = 0; j < test[0].length; j++) {
-				s += test[i][j][0] + "\t" + test[i][j][1] + "\t" + test[i][j][1] + "\t\t";					
+			for (int j = 0; j < encoded[0].length; j++) {
+				s += encoded[i][j][0] + "\t" + encoded[i][j][1] + "\t" + encoded[i][j][1] + "\t\t";					
 			}
 			System.out.println(s);
 		}
