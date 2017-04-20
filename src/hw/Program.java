@@ -104,7 +104,7 @@ public class Program {
 
 			// Output matrix into a file line by line
 			int ySize = matrix.length;
-			int xSize = matrix[1].length;
+			int xSize = matrix[0].length;
 			for (int i = 0; i < ySize; i++) {
 				String s = "";
 				for (int j = 0; j < xSize; j++) {
@@ -147,50 +147,57 @@ public class Program {
 		// y, x, z
 		for (int y = 0; y < matrixB.length; y++) {
 			for (int x = 0; x < matrixB[0].length; x++) {
-					int orgValR = matrixB[y][x][0];
-					int orgValG = matrixB[y][x][1];
-					int orgValB = matrixB[y][x][2];
-					System.out.println("original value: " + orgValR + " orgValG:" + orgValG + " orgValB:" + orgValB);
-					
-					String binaryStringR = Integer.toBinaryString(orgValR);
-					while (binaryStringR.length() < 8) {
-						binaryStringR = "0" + binaryStringR;
-					}
-					
-					String binaryStringG = Integer.toBinaryString(orgValG);
-					while (binaryStringG.length() < 8) {
-						binaryStringG = "0" + binaryStringG;
-					}
-					
-					String binaryStringB = Integer.toBinaryString(orgValB);
-					while (binaryStringB.length() < 8) {
-						binaryStringB = "0" + binaryStringB;
-					}
+				int orgValR = matrixB[y][x][0];
+				int orgValG = matrixB[y][x][1];
+				int orgValB = matrixB[y][x][2];
+				System.out.println("original value: " + orgValR + " orgValG:" + orgValG + " orgValB:" + orgValB);
+				
+				String binaryStringR = Integer.toBinaryString(orgValR);
+				while (binaryStringR.length() < 8) {
+					binaryStringR = "0" + binaryStringR;
+				}
+				
+				String binaryStringG = Integer.toBinaryString(orgValG);
+				while (binaryStringG.length() < 8) {
+					binaryStringG = "0" + binaryStringG;
+				}
+				
+				String binaryStringB = Integer.toBinaryString(orgValB);
+				while (binaryStringB.length() < 8) {
+					binaryStringB = "0" + binaryStringB;
+				}
 
-					for (int i = 0; i < binaryStringR.length(); i++) {
-						System.out.println("i:" + i + " y:" + y + " x:" + x + " z:" + 0 + " yOffset:" + yOffset + " xOffset:" + xOffset + " binary:" + binaryStringR);
-						key[yOffset][xOffset*8 + i][0] = Integer.parseInt(binaryStringR.substring(i, i + 1));
-						//System.out.println("i:" + i + " y:" + y + " x:" + x + " z:" + 0 + " = " + key[yOffset][xOffset][0]);
-					}
-					
-					for (int i = 0; i < binaryStringG.length(); i++) {
-						System.out.println("i:" + i + " y:" + y + " x:" + x + " z:" + 0 + " yOffset:" + yOffset + " xOffset:" + xOffset + " binary:" + binaryStringG);
-						key[yOffset][xOffset*8 + i][1] = Integer.parseInt(binaryStringG.substring(i, i + 1));
-						//System.out.println("i:" + i + " y:" + y + " x:" + x + " z:" + 0 + " = " + key[yOffset][xOffset][0]);
-					}
-					
-					for (int i = 0; i < binaryStringB.length(); i++) {
-						System.out.println("i:" + i + " y:" + y + " x:" + x + " z:" + 0 + " yOffset:" + yOffset + " xOffset:" + xOffset + " binary:" + binaryStringB);
-						key[yOffset][xOffset*8 + i][2] = Integer.parseInt(binaryStringB.substring(i, i + 1));
-						//System.out.println("i:" + i + " y:" + y + " x:" + x + " z:" + 0 + " = " + key[yOffset][xOffset][0]);
-					}
+				for (int i = 0; i < binaryStringR.length(); i++) {
+					System.out.println("i:" + i + " y:" + y + " x:" + x + " z:" + 0 + " yOffset:" + yOffset + " xOffset:" + xOffset + " binary:" + binaryStringR);
+					key[yOffset][xOffset*8 + i][0] = Integer.parseInt(binaryStringR.substring(i, i + 1));
+					//System.out.println("i:" + i + " y:" + y + " x:" + x + " z:" + 0 + " = " + key[yOffset][xOffset][0]);
+				}
+				
+				for (int i = 0; i < binaryStringG.length(); i++) {
+					System.out.println("i:" + i + " y:" + y + " x:" + x + " z:" + 0 + " yOffset:" + yOffset + " xOffset:" + xOffset + " binary:" + binaryStringG);
+					key[yOffset][xOffset*8 + i][1] = Integer.parseInt(binaryStringG.substring(i, i + 1));
+					//System.out.println("i:" + i + " y:" + y + " x:" + x + " z:" + 0 + " = " + key[yOffset][xOffset][0]);
+				}
+				
+				for (int i = 0; i < binaryStringB.length(); i++) {
+					System.out.println("i:" + i + " y:" + y + " x:" + x + " z:" + 0 + " yOffset:" + yOffset + " xOffset:" + xOffset + " binary:" + binaryStringB);
+					key[yOffset][xOffset*8 + i][2] = Integer.parseInt(binaryStringB.substring(i, i + 1));
+					//System.out.println("i:" + i + " y:" + y + " x:" + x + " z:" + 0 + " = " + key[yOffset][xOffset][0]);
+				}
 
-					if (x < matrixB[0].length-1) {
-						xOffset++;
-					} else {
-						xOffset = 0;
-						yOffset++;
-					}
+				if (xOffset * 8 < matrixA[0].length - 8) {
+					xOffset++;
+				} else {
+					xOffset = 0;
+					yOffset++;
+				}
+					
+//				if (xOffset * 8 < (matrixB[0].length - 2) * 8) {
+//					xOffset++;
+//				} else {
+//					xOffset = 0;
+//					yOffset++;
+//				}
 			}
 		}
 		
@@ -240,14 +247,14 @@ public class Program {
 				}
 			}
 		}
-		for (int y = 0; y < matrixA.length; y++) {
-			for (int x = 0; x < matrixA[0].length; x++) {
-				System.out.print(" R:" + key[y][x][0]);
-				//System.out.print(" G:" + key[y][x][1]);
-				//System.out.print(" B:" + key[y][x][2]);
-			}
-			System.out.println("");
-		}
+//		for (int y = 0; y < matrixA.length; y++) {
+//			for (int x = 0; x < matrixA[0].length; x++) {
+//				System.out.print(" R:" + key[y][x][0]);
+//				//System.out.print(" G:" + key[y][x][1]);
+//				//System.out.print(" B:" + key[y][x][2]);
+//			}
+//			System.out.println("");
+//		}
 		
 		int yOffset = 0;
 		int xOffset = 0;
@@ -258,6 +265,7 @@ public class Program {
 				String r = "";
 				String g = "";
 				String b = "";
+				
 				for (int i = 0; i < 8; i++) {
 					int value = key[y][x + i][0];
 					r += value + "";
@@ -267,33 +275,35 @@ public class Program {
 					int value = key[y][x + i][1];
 					g += value + "";
 				}
+				
 				for (int i = 0; i < 8; i++) {
 					int value = key[y][x + i][2];
 					b += value + "";
 				}
 				
-				System.out.print(r + " " + g + " " + b + " ");
-				
 				int valueR = Integer.parseInt(r, 2);
 				int valueG = Integer.parseInt(g, 2);
 				int valueB = Integer.parseInt(b, 2);
 				
-				System.out.print(valueR + " " + valueG + " " + valueB + " ");
-				
-				System.out.println("yOffset: " + yOffset + " xOffset: " + xOffset + " y: " + y + " x: " + x + " R:" + valueR + " G:" + valueG + " B:" + valueB);
-				if (yOffset < keyY && xOffset < keyX) {
+				if (yOffset < keyY) {
+					System.out.print(r + " " + g + " " + b + " ");
+					System.out.print(valueR + " " + valueG + " " + valueB + " ");
+					System.out.println(" yOffset:" + yOffset + " xOffset:" + xOffset + " y:" + y + " x:" + x + " R:" + valueR + " G:" + valueG + " B:" + valueB);
+					
 					result[yOffset][xOffset][0] = valueR;
 					result[yOffset][xOffset][1] = valueG;
 					result[yOffset][xOffset][2] = valueB;
 				}
 
-				if (xOffset < keyX  - 1) {
+				//if (x < (keyX - 1) * 8) {
+				if (xOffset < keyX-1) {
 					xOffset++;
 				} else {
 					xOffset = 0;
 					yOffset++;
 				}
 			}
+			//xOffset = 0;
 		}
 
 		return result;
