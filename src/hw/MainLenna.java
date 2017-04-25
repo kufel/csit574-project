@@ -13,23 +13,23 @@ public class MainLenna {
 		Program program = new Program();
 				
 		int[][][] image = program.openFile("PPM/lennacolor-P6-256-256-256.dat", 256, 256);
-		program.saveHistogram(image, "output/lennae-iamge-r.cvs", 0, 256);
-		program.saveHistogram(image, "output/lenna-iamge-g.cvs", 1, 256);
-		program.saveHistogram(image, "output/lenna-iamge-b.cvs", 2, 256);
+		program.saveHistogram(image, "output/lenna-iamge-r.csv", 0, 256);
+		program.saveHistogram(image, "output/lenna-iamge-g.csv", 1, 256);
+		program.saveHistogram(image, "output/lenna-iamge-b.csv", 2, 256);
 		int[][][] key = program.openFile("PPM/browser-64-64-256.dat", 64, 64);
-		program.saveHistogram(key, "output/lennae-key-r.cvs", 0, 256);
-		program.saveHistogram(key, "output/lenna-key-g.cvs", 1, 256);
-		program.saveHistogram(key, "output/lenna-key-b.cvs", 2, 256);
+		program.saveHistogram(key, "output/lennae-key-r.csv", 0, 256);
+		program.saveHistogram(key, "output/lenna-key-g.csv", 1, 256);
+		program.saveHistogram(key, "output/lenna-key-b.csv", 2, 256);
 		int[][][] encoded = program.encodeLSB(image, key);
-		program.saveHistogram(encoded, "output/lennae-encoded-r.cvs", 0, 256);
-		program.saveHistogram(encoded, "output/lenna-encoded-g.cvs", 1, 256);
-		program.saveHistogram(encoded, "output/lenna-encoded-b.cvs", 2, 256);
+		program.saveHistogram(encoded, "output/lenna-encoded-r.csv", 0, 256);
+		program.saveHistogram(encoded, "output/lenna-encoded-g.csv", 1, 256);
+		program.saveHistogram(encoded, "output/lenna-encoded-b.csv", 2, 256);
 		program.saveFile(encoded, "output/lenna-encoded.ppm", "P3", encoded.length, encoded[0].length, 256);
 		
 		int[][][] decoded = program.decodeLSB(image, encoded, 64, 64);
-		program.saveHistogram(decoded, "output/lennae-decoded-r.cvs", 0, 256);
-		program.saveHistogram(decoded, "output/lenna-decoded-g.cvs", 1, 256);
-		program.saveHistogram(decoded, "output/lenna-decoded-b.cvs", 2, 256);
+		program.saveHistogram(decoded, "output/lenna-decoded-r.csv", 0, 256);
+		program.saveHistogram(decoded, "output/lenna-decoded-g.csv", 1, 256);
+		program.saveHistogram(decoded, "output/lenna-decoded-b.csv", 2, 256);
 		program.saveFile(decoded, "output/lenna-decode.ppm", "P3", decoded.length, decoded[0].length, 256);
 
 //		System.out.println(" ");
