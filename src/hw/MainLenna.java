@@ -13,11 +13,23 @@ public class MainLenna {
 		Program program = new Program();
 				
 		int[][][] image = program.openFile("PPM/lennacolor-P6-256-256-256.dat", 256, 256);
+		program.saveHistogram(image, "output/lennae-iamge-r", 0, 256);
+		program.saveHistogram(image, "output/lenna-iamge-g", 1, 256);
+		program.saveHistogram(image, "output/lenna-iamge-b", 2, 256);
 		int[][][] key = program.openFile("PPM/browser-64-64-256.dat", 64, 64);
+		program.saveHistogram(key, "output/lennae-key-r", 0, 256);
+		program.saveHistogram(key, "output/lenna-key-g", 1, 256);
+		program.saveHistogram(key, "output/lenna-key-b", 2, 256);
 		int[][][] encoded = program.encodeLSB(image, key);
+		program.saveHistogram(encoded, "output/lennae-encoded-r", 0, 256);
+		program.saveHistogram(encoded, "output/lenna-encoded-g", 1, 256);
+		program.saveHistogram(encoded, "output/lenna-encoded-b", 2, 256);
 		program.saveFile(encoded, "output/lenna-encoded.ppm", "P3", encoded.length, encoded[0].length, 256);
 		
 		int[][][] decoded = program.decodeLSB(image, encoded, 64, 64);
+		program.saveHistogram(decoded, "output/lennae-decoded-r", 0, 256);
+		program.saveHistogram(decoded, "output/lenna-decoded-g", 1, 256);
+		program.saveHistogram(decoded, "output/lenna-decoded-b", 2, 256);
 		program.saveFile(decoded, "output/lenna-decode.ppm", "P3", decoded.length, decoded[0].length, 256);
 
 //		System.out.println(" ");

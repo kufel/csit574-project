@@ -20,6 +20,7 @@ import com.sun.org.apache.xml.internal.security.keys.content.KeyValue;
  * A collection of all image editing functions.
  * 
  * @author Sebastian Kufel
+ * @author Ben Cooper
  * @version 2
  * @since 02/01/2017
  */
@@ -292,5 +293,43 @@ public class Program {
 		}
 
 		return result;
+	}
+	
+	public void saveHistogram(int[][][] matrix, String file, int zLevel, int alphaLevel) {
+		int[] count = new int[alphaLevel];
+		int ySize = matrix.length;
+		int xSize = matrix[1].length;
+
+		FileOutputStream out = null;
+		
+		try {
+			out = new FileOutputStream(file);
+			for (int i = 0; i < ySize; i++) {
+				for (int j = 0; j < xSize; j++) {
+					//System.out.println("histogram " + i + "," + j);
+					count[matrix[i][j][zLevel]] += 1;
+				}
+			}
+
+			String s = "";
+			out.write(s.getBytes());
+			for (int i = 0; i < count.length; i++) {
+				s = count[i] + "\n";
+				out.write(s.getBytes());
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (out != null) {
+				try {
+					out.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		System.out.println("Histogram " + file + " saved.");
 	}
 }
